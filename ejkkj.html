@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>My Paint</title>
+<style>
+body {text-align: center;}
+#c {width: 100%;}
+#col {width: 100px; cursor: pointer;}
+.cont {
+position: relative;
+width: 700px;
+height: 450px;
+border: darkslategrey 5px solid;
+margin: 20px auto;
+cursor: cell;
+}
+</style>
+</head>
+<body>
+<h1>Welcome to my paint!)</h1>
+<div class="cont">
+<canvas id="c" width="700px" height="450px"></canvas>
+</div>
+<input type="color" id="col" value="#000000"/>
+<script>
+let cnv=document.getElementById('c');
+let ctx=cnv.getContext('2d'), col='black';
+document.getElementById('col').oninput=function(){col=this.value;};
+cnv.onmousedown = ()=>{
+setTimeout(()=>{
+cnv.onmousemove = (event)=>{
+ctx.fillStyle=col;
+ctx.fillRect(event.offsetX - 5, event.offsetY - 5, 10, 10);
+};
+}, 100);
+cnv.onmouseup = ()=>{cnv.onmousemove = null;};
+};
+</script>
+</body>
+</html>
